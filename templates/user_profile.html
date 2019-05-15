@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Личный кабинет пользователя - {{ user.username }}{% endblock %}
+
+{% block content %}
+  <div class="content-section">
+    <div class="media">
+      <img class="rounded-circle account-img" src="{{ user.userprofile.avatar.url }}" alt="">
+      <div class="media-body">
+        <h2 class="account-heading">Имя пользователя: {{ user.username }}</h2>
+        <p class="text-body">ФИО: {{ user.full_name }}</p>
+        <p class="text-body">Дата рождения: {{ user.date_of_birth }}</p>
+        <p class="text-body">Контактный телефон: {{ user.phone_no }}</p>
+        <p class="text-body">Email: {{ user.email }}</p>
+        <p class="text-body">Роль пользователя: {{ user.user_role }}</p>
+        {% if user.user_role == 'СТ' %}
+          <p class="text-body">Группа: {{ user.student_group }}</p>
+        {% endif %}
+      </div>
+    </div>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <fieldset class="form-group">
+        <legend class="border-bottom mb-4"></legend>
+          {{ u_form|crispy }}
+          {{ p_form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-success ml-2" type="submit">Изменить данные</button>
+      </div>
+    </form>
+
+{% endblock %}
+
+
+<!--
+  <div class="card" style="width: 50rem; background-color: #87CEFA">
+    <img src="{{ user.userprofile.avatar.url }}" class="card-img-top" alt="" style="width: 300px; height: 300px; display: block; margin-left: auto; margin-right: auto">
+    <div class="card-body">
+      <h5 class="card-title">Имя пользователя: {{ user.username }}</h5>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ФИО: {{ user.full_name }}</li>
+        <li class="list-group-item">Дата рождения: {{ user.date_of_birth }}</li>
+        <li class="list-group-item">Контактный телефон: {{ user.phone_no }}</li>
+        <li class="list-group-item">Email: {{ user.email }}</li>
+        <li class="list-group-item">Роль пользователя: {{ user.user_role }}</li>
+        {% if user.user_role == 'СТ' %}
+          <li class="list-group-item">Группа: {{ user.student_group }}</li>
+        {% endif %}
+    </ul>
+  </div>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ u_form|crispy }}
+    {{ p_form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Изменить данные</button>
+    <button class="btn btn-outline-info" type="submit">Update</button>
+  </form>
+</div>
+-->

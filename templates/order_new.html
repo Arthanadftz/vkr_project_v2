@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>Подать заявку на получение справки</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-success ml-2" type="submit">Создать</button>
+    <a class="btn btn-light ml-2" href="{% url 'home' %}">Вернуться</a>
+  </form>
+{% endblock %}

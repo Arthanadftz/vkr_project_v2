@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Глвная страница{% endblock %}
+
+{% block content %}
+  <div class="jumbotron">
+    <h1 class="display-4">Приложение новостей</h1>
+    <p class="lead">Проект кафедры.</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Новости</a>
+    </p>
+  </div>
+  {% if user.user_role == 'СТ' %}
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение заказа справок</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете закзать справку об обучении.</p>
+
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'order_new' %}" role="button">Заказать справку</a>
+      </p>
+    </div>
+
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение групповых каналов</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете войти в канал, для этого Вам необходимо запросить у Вашего преподавателя название канала.</p>
+
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'chat_select' %}" role="button">Выбрать канал</a>
+      </p>
+    </div>
+  {% endif %}
+
+  {% if user.user_role == 'ПР' %}
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение групповых каналов</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете создать виртуальный канал, куда смогут подключаться пользователи из группы "Студент". Не забудьте сообщить им название канала.</p>
+
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'index_chat' %}" role="button">Создать канал</a>
+      </p>
+    </div>
+  {% endif %}
+{% endblock %}

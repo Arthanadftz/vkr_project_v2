@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявки пользователя{% endblock %}
+
+{% block content %}
+  <div class="content-section" style="height: 100%;">
+      <div class="media-body">
+        <h2 class="account-heading">{{ object.title }}</h2>
+        <p class="text-body">Заказчик: {{ object.author }}</p>
+        <p class="text-body">Дата заявки: {{ object.date }}</p>
+        {% if object.status == 'ГТВ' %}
+          <p class="text-body btn btn-success m-3">Статус: {{ object.status }}</p>
+        {% else %}
+          <p class="text-body btn btn-warning m-3">Статус: {{ object.status }}</p>
+        <!-- <p class="list-group-item-warning">Статус: {{ object.status }}</p> -->
+        {% endif %}
+        <p class="text-body">Предположительная дата готовности: {{ object.pred_date_rdy }}</p>
+      </div>
+      <br>
+      {% if user.is_superuser %}
+        <p>
+          <a class="btn btn-primary ml-2" href="{% url 'order_edit' object.pk %}">Изменить статус</a>
+        </p>
+      {% endif %}
+      <p><a class="btn btn-secondary ml-2" href="{% url 'home' %}">Вернуться на главную страницу</a></p>
+  </div>
+{% endblock content %}

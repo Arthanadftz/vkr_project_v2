@@ -1,0 +1,33 @@
+.account-img {
+  height: 150px;
+  width: 150px;
+  margin-right: 20px;
+  margin-bottom: 16px;
+}
+
+.account-heading {
+  font-size: 2.5rem;
+}
+
+.content-section {
+  height: 850px;
+  width: auto;
+  background: #e9ecef;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.content-section p {
+  font-size: 20px;
+}
+
+body {
+    background-image: url(http://iu1ni.bmstu.ru/imgs/mstu-logo.png);
+    background-repeat: no-repeat;
+    background-position: center 460px;
+    background-size: 25%;
+    background-color: #ffffff;
+    background-attachment: fixed;
+}

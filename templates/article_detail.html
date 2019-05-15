@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-section" style="height: 100%;">
+    <h2 class="display-4">{{ object.title }} <span class="badge badge-info">New</span></h2>
+    {% if article.document %}
+      <img src="{{ article.document.url }}" class="image-responsive" style="height: 600px; width: 800px; margin-left: 130px; margin-right: 20px; margin-bottom: 16px; border: 1px solid black; border-radius: 20px;">
+    {% endif %}
+    <div class="media-body">
+        <p class="text-body">Опубликовал: {{ object.author }}</p>
+        <small>От {{ object.date }}</small>
+        <p class="text-body">{{ object.body }}</p>
+      {% if user.user_role == 'ПР' %}
+        <p>
+          <a class="btn btn-primary ml-2" href="{% url 'article_edit' article.pk %}">Изменить</a>
+          <a class="btn btn-warning ml-2" href="{% url 'article_delete' article.pk %}">Удалить</a>
+        </p>
+      {% endif %}
+    </div>
+    <p><a class="btn btn-light ml-2" href="{% url 'article_list' %}">Вернуться к списку новостей</a></p>
+  </div>
+
+{% endblock content %}
+
+<!--
+content-section
+<div class="article-entry">
+
+<div class="content-section">
+      <div class="media">
+        {% if post.document %}
+          <img src="{{ post.document.url }}" class="image-responsive" style="height: 600px; width: 800px; margin-left: 130px; margin-right: 20px; margin-bottom: 16px; border: 1px solid black; border-radius: 20px;">
+          <br>
+        {% endif %}
+      </div>
+
+      <div class="media-body">
+        <h2 class="account-heading">{{ object.title }}</h2>
+        <p class="text-body">by {{ object.author }} | {{ object.date }}</p>
+        <p class="text-body">{{ object.body }}</p>
+      </div>
+
+      {% if user.is_superuser %}
+        <p>
+          <a class="btn btn-primary ml-2" href="{% url 'post_edit' post.pk %}">Изменить</a>
+          <a class="btn btn-warning ml-2" href="{% url 'post_delete' post.pk %}">Удалить</a>
+        </p>
+      {% endif %}
+      <br>
+      <p><a class="btn btn-secondary ml-2" href="{% url 'posts_list' %}">Вернуться к списку новостей</a></p>
+  </div>
+-->

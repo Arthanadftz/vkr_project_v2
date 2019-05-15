@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявки{% endblock %}
+
+{% block content %}
+  {% for order in object_list %}
+    <div class="card" style="background: #f8f9fa; border: 1px solid black; border-radius: 20px;">
+      <div class="card-header">
+        <span class="font-weight-bold">{{ order.title }}</span> &middot;
+
+      </div>
+      <div class="card-body">
+        <span class="text-muted">Создал: {{ order.author }}</span>
+        <span class="text-muted">Дата создания: {{ order.date }}</span>
+        {% if order.status == 'ГТВ' %}
+          <p class="text-body btn btn-success m-3">{{ order.status }}</p>
+        {% else %}
+          <p class="btn btn-warning m-3">{{ order.status }}</p>
+          <br>
+          <span class="text-muted">Предварительная дата готовности: {{ order.pred_date_rdy }}</span>
+        {% endif %}
+      </div>
+      <a class="btn btn-secondary m-3" href="{% url 'order_detail' order.pk %}">Просмотр</a>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock %}

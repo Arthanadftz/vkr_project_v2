@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>Изменить статус заявки</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-info ml-2" type="submit">Обновить</button>
+    <a class="btn btn-secondary ml-2" href="{% url 'orders_list' %}">Вернуться</a>
+  </form>
+{% endblock %}
