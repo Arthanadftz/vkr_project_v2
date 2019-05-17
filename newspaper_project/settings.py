@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     # Chats
     'channels',
     'chat',
+    # Attendance
+    'attendance_control',
 ]
 
 MIDDLEWARE = [

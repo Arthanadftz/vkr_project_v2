@@ -4,7 +4,11 @@
 {% block content %}
   <div class="jumbotron">
     <h1 class="display-4">Приложение новостей</h1>
-    <p class="lead">Проект кафедры.</p>
+    {% if user.is_authenticated %}
+      <p class="lead">Здравствйте, <span class="badge badge-info">{{ user.username }}</span>! В приложении новостей Вам доступны самые свежие новости кафедры и мира науки. Добро пожаловать!</p>
+    {% else %}
+      <p class="lead">Здравствйте! Вы не выполнили вход. Для доступа к ресурсам, пожалуйcта, <a href="{% url 'login' %}">авторизируйтесь в системе</a></p>
+    {% endif %}
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Новости</a>
     </p>
@@ -39,6 +43,19 @@
 
       <p class="lead">
         <a class="btn btn-primary btn-lg" href="{% url 'index_chat' %}" role="button">Создать канал</a>
+      </p>
+    </div>
+
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение контроля посещаемости</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете добавить журнал посещаемости, если по каким-либо причинам этого не удалось сделать средствам автоматизированной системы. Также Вам доступен список журналов для чтения и скачивания в формате <span class="badge badge-info">csv</span>.</p>
+
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'attendance_new' %}" role="button">Добавить журнал посещаемости</a>
+      </p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'attendance_list' %}" role="button">Список журналов</a>
       </p>
     </div>
   {% endif %}

@@ -10,18 +10,25 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <!-- MDN <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" type="text/css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}" type="text/css">
+
 
     <title>{% block title %}Главная страница сайта кафедры ИУ-6{% endblock title %}</title>
 
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4" style="height: 80px;">
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-4" style="height: 80px;">
       <a class="navbar-brand" href="{% url 'home' %}">Главная страница</a>
       <a class="navbar-brand" href="{% url 'article_list' %}">Новости</a>
       {% if user.user_role == 'СТ' %}
         <a class="navbar-brand" href="{% url 'order_new' %}">Заказать справку</a>
       {% endif %}
+
+      {% if user.is_superuser %}
+        <a class="navbar-brand" href="{% url 'attendance_new' %}">Добавить журнал посещаемости</a>
+      {% endif %}
+
       {% if user.user_role == 'ПР' %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a href="{% url 'article_new' %}">+ Создать новость</a>
@@ -60,6 +67,8 @@
                   {% if user.user_role == 'ПР' %}
                     <a class="dropdown-item" href="{% url 'index_chat' %}">Создать чат</a>
                     <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'attendance_list' %}">Посещаемость</a>
+                    <div class="dropdown-divider"></div>
                   {% endif %}
 
                   <a class="dropdown-item" href="{% url 'user_profile' %}">Личный кабинет</a>
@@ -84,49 +93,97 @@
       </div>
     </nav>
 
-    <div class="container">
+    <!-- JQUERY FOR TABLE -->
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+    <div class="container" style="top: 110px; bottom: 120px; margin-bottom: 100px; position: relative;">
       {% block content %}
       {% endblock content %}
     </div>
 
-    <!-- MDN
-    <footer>
-      <div class="container">
-        <ul class="list-unstyled list-inline text-center">
-          <li class="list-inline-item">
-            <a class="btn-floating btn-fb mx-1" href="https://youtube.com/">
-              <i class="fab fa-youtube"> </i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="btn-floating btn-gplus mx-1" href="https://google.com/">
-              <i class="fab fa-google-plus-g"> </i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="btn-floating btn-li mx-1" href="https://vk.com/">
-              <i class="fab fa-vk"> </i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a class="btn-floating btn-li mx-1" href="https://github.com/Arthadftz/">
-              <i class="fab fa-github"> </i>
-            </a>
-          </li>
-        </ul>
-
-      <div class="footer-copyright text-center py-3">© 2019 Copyright:
-        <a href="https://github.com/Arthadftz/"> GitHub.com</a>
-      </div>
-
-    </footer>
-    -->
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+
+    <!-- Remove comment
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- MDN <script type="text/javascript" src="{% static 'js/mdb.min.js' %}"></script> -->
+
   </body>
+
+  <footer class="blog-footer fixed-bottom" style="height: 96px; width: 100%; left: 0px; right: 0px; text-align: center; color: white; background-color: #343a40!important; margin-top: 100px;">
+
+    <p style="margin-top: 10px;">Форма обратной связи <a href="#">BMSTU</a>.</p>
+
+    <div class="soc-icons">
+      <ul>
+        <li><a href="https://github.com/arthanadftz" target="_blank"><i class="fa fa-github fa-2x"></i></a></li>
+        <li><a href="https://github.com/arthanadftz" target="_blank"><i class="fa fa-vk fa-2x"></i></a></li>
+        <li><a href="https://github.com/arthanadftz" target="_blank"><i class="fa fa-youtube-square fa-2x"></i></a></li>
+        <li><a href="https://github.com/arthanadftz" target="_blank"><i class="fa fa-telegram fa-2x"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+  <!--
+  <footer class="blog-footer" style="height: 120px; top: 100px; width: 100%; left: 0px; right: 0px; position: relative; text-align: center; color: white; background-color: #343a40!important; margin-bottom: 0px;">
+    <br>
+    <p>Форма обратной связи <a href="#">BMSTU</a>.</p>
+
+    <div class="soc-icons">
+      <ul>
+        <li><a href="https://github.com/Arthadftz"><i class="fa fa-github fa-2x"></i></a></li>
+        <li><a href="https://github.com/Arthadftz"><i class="fa fa-vk fa-2x"></i></a></li>
+        <li><a href="https://github.com/Arthadftz"><i class="fa fa-youtube-square fa-2x"></i></a></li>
+        <li><a href="https://github.com/Arthadftz"><i class="fa fa-telegram fa-2x"></i></a></li>
+      </ul>
+    </div>
+  </footer>
+  -->
 </html>
+
+<!-- MDN
+<footer>
+  <div class="container">
+    <ul class="list-unstyled list-inline text-center">
+      <li class="list-inline-item">
+        <a class="btn-floating btn-fb mx-1" href="https://youtube.com/">
+          <i class="fab fa-youtube"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-gplus mx-1" href="https://google.com/">
+          <i class="fab fa-google-plus-g"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1" href="https://vk.com/">
+          <i class="fab fa-vk"> </i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a class="btn-floating btn-li mx-1" href="https://github.com/Arthadftz/">
+          <i class="fab fa-github"> </i>
+        </a>
+      </li>
+    </ul>
+
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="https://github.com/Arthadftz/"> GitHub.com</a>
+  </div>
+
+</footer>         display: flex
+<p> НОРМ!!!
+  <a href="https://github.com/Arthadftz"><i class="fa fa-github fa-2x"></i></a>
+
+  ul style="overflow-x:hidden; white-space:nowrap; height: auto;; width: 100%;">
+    <li class="mr-3" style="display:inline;"><a href="https://github.com/Arthadftz"><i class="fa fa-github fa-2x"></i></a></li>
+    <li class="mr-3" style="display:inline;"><a href="https://github.com/Arthadftz"><i class="fa fa-vk fa-2x"></i></a></li>
+    <li class="mr-3" style="display:inline;"><a href="https://github.com/Arthadftz"><i class="fa fa-youtube-square fa-2x"></i></a></li>
+    <li class="mr-3" style="display:inline;"><a href="https://github.com/Arthadftz"><i class="fa fa-telegram fa-2x"></i></a></li>
+  </ul>
+</p>
+-->

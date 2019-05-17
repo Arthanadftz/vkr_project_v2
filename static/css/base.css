@@ -31,3 +31,15 @@ body {
     background-color: #ffffff;
     background-attachment: fixed;
 }
+
+.soc-icons ul {
+  overflow-x:hidden;
+  white-space:nowrap;
+  height: auto;
+  width: 100%;
+}
+
+.soc-icons li {
+  margin-right: 2rem;
+  display: inline;
+}

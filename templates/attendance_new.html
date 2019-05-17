@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Создание отчета{% endblock %}
+
+{% block content %}
+  <h1>Заполнить журнал посещаемости</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <!--
+    <select class="" name="stud_groups">
+    {% for group in groups %}
+      <option value="{{ group }}">{{ group }}</option>
+    {% endfor %}
+    </select>
+
+    <select class="" name="disciples">
+    {% for disciple in disciples %}
+      <option value="{{ disciple.name }}">{{ disciple.name }}</option>
+    {% endfor %}
+    </select>
+    -->
+
+    <table id="att_form">
+      <thead>
+        <tr>
+          <th>ФИО студента</th>
+          <th>Присутствие</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student in students %}
+          <tr>
+            <td>{{ student.full_name }}</td>
+            <td><input type="checkbox" name="" value=""></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="btn btn-success ml-2" type="submit">Сохранить</button>
+    <a class="btn btn-light ml-2" href="{% url 'home' %}">Вернуться</a>
+  </form>
+
+  <!-- <p id="json_obj"></p> -->
+
+  <script type="text/javascript">
+    var refTab = document.getElementById("att_form")
+    var  ttl;
+    var arrNames = [];
+    var arrChecks = [];
+
+    // Loop through all rows and columns of the table and popup alert with the value
+    // /content of each cell.
+    for ( var i = 2; row = refTab.rows[i]; i++ ) {
+      row = refTab.rows[i];
+      for ( var j = 0; col = row.cells[j]; j++ ) {
+        //console.log(col.firstChild.nodeValue);
+        if (j % 2 === 0) {
+          arrNames.push(col.firstChild.nodeValue);
+        }
+      }
+    }
+
+    for ( var i = 1; i <= arrNames.length; i++ ) {
+      arrChecks.push(1)
+    }
+    var obj = { student: arrNames, check: arrChecks};
+    var myJSON = JSON.stringify(obj);
+    //document.getElementById("json_obj").innerHTML = myJSON;
+    //console.log(myJSON);
+    //console.log(arrNames.length, arrChecks.length);
+
+  </script>
+
+  <!--
+  <script type="text/javascript">
+    $(document).ready(function() {
+    var table = $('#att_form').DataTable({
+        columnDefs: [{
+            orderable: false
+        }]
+    });
+
+    $('button').click( function() {
+        var data = table.$('input, select').serialize();
+        console.log(data)
+        return false;
+      });
+    });
+  </script>
+  -->
+
+{% endblock %}
+
+
+
+
+
+
+<!--
+<h1>Создать отчет посещаемости</h1>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-success ml-2" type="submit">Сохранить</button>
+</form>
+-->
