@@ -23,8 +23,8 @@
     </select>
     -->
 
-    <table id="att_form">
-      <thead>
+    <table id="att_form" class="table table-hover">
+      <thead class="thead-dark">
         <tr>
           <th>ФИО студента</th>
           <th>Присутствие</th>
@@ -41,9 +41,11 @@
     </table>
     <button class="btn btn-success ml-2" type="submit">Сохранить</button>
     <a class="btn btn-light ml-2" href="{% url 'home' %}">Вернуться</a>
+
+    <!--<img src="/media/white_power.png" alt="" style="width: 100%; height 1px; position: absolute; bottom: 300px; left: 15px; right: 15px;">-->
   </form>
 
-  <!-- <p id="json_obj"></p> -->
+
 
   <script type="text/javascript">
     var refTab = document.getElementById("att_form")
@@ -68,7 +70,7 @@
     }
     var obj = { student: arrNames, check: arrChecks};
     var myJSON = JSON.stringify(obj);
-    //document.getElementById("json_obj").innerHTML = myJSON;
+    document.getElementById("id_tmp").innerHTML = myJSON;
     //console.log(myJSON);
     //console.log(arrNames.length, arrChecks.length);
 

@@ -1,38 +1,19 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+from django.core.exceptions import ValidationError
 # Create your models here.
 import os
-from django.core.exceptions import ValidationError
 
 from users.models import CustomUser
 
+
 def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]
-    valid_extensions = ['json', 'csv', 'jpg']
+    valid_extensions = ['json', 'csv', 'jpg', 'png']
 
     if not ext.lower() in valid_extensions:
         raise ValidationError(f'Рарешение {ext} не поддерживается.')
-
-
-"""
-class Attendance(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Название")
-    document = models.FileField(verbose_name="Файл", blank=True, null=True, upload_to="documents/attendance/%Y%m%D/") #/%Y%m%D/  validators=[validate_file_extension],
-    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        verbose_name = "Создал"
-    )
-
-    def __str__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('attendance_detail', args=[str(self.id)])
-
-"""
 
 
 class Disciple(models.Model):
@@ -77,6 +58,8 @@ class Attendance(models.Model):
         on_delete=models.CASCADE,
         verbose_name = "Создал"
     )
+
+    tmp = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.disciple}-{self.date}'
