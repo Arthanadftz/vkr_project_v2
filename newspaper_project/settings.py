@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'chat',
     # Attendance
     'attendance_control',
+    # Question
+    "questiontest",
 ]
 
 MIDDLEWARE = [

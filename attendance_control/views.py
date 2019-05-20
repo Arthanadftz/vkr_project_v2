@@ -63,7 +63,7 @@ class AttendanceCreateView(CreateView):
 
 
         context = super(AttendanceCreateView, self).get_context_data(*args, **kwargs)
-        context['students'] = CustomUser.objects.filter(student_group='ИУ6')
+        context['students'] = CustomUser.objects.filter(student_group='ИУ6', user_role='СТ')
         context['disciples'] = Disciple.objects.all()
         context['groups'] = groups_choices
         #white_file_path = os.path.join(settings.MEDIA_ROOT, 'white_power.png')

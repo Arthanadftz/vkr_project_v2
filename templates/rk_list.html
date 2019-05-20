@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Список РК{% endblock %}
+
+{% block content %}
+  {% for item in object_list %}
+    <div class="card" style="background: #f8f9fa;">
+      <div class="card-header">
+        <span class="font-weight-bold">{{ item.name }}</span> &middot;
+        <span class="text-muted">Дата начала {{ item.date_start}}</span>
+        <span class="text-muted">{{ item.date_stop }}</span>
+
+      </div>
+      <div class="card-body">
+        {% for obj in item.question_set.all %}
+          <p>{{ obj.name }}</p>
+          <span class="text-muted">{{ obj.body }}</span>
+        {% endfor %}
+      </div>
+      <a class="btn btn-info m-3" href="{% url 'question_new' item.pk %}">Добавить вопрос</a>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock %}
