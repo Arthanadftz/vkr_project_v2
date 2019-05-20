@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="content-section" style="height: 100%;">
-    <h2 class="display-4">{{ object.title }} <span class="badge badge-info">New</span></h2>
+    <h2 class="display-4">Журнал посещаемости по дисциплине <span class="badge badge-info">{{ object.disciple.name }}</span></h2>
     {% if object.document %}
       <img src="{{ object.document.url }}" class="image-responsive" style="height: 600px; width: 800px; margin-left: 130px; margin-right: 20px; margin-bottom: 16px; border: 1px solid black; border-radius: 5px;">
     {% endif %}
@@ -10,7 +10,7 @@
         <p class="text-body">Опубликовал: {{ object.author }}</p>
         <small>От {{ object.date }}</small>
         <p>
-          <a class="btn btn-info ml-2" href="#">Скачать</a>
+          <a class="btn btn-info ml-2" href="{{ object.document.url }}">Скачать</a>
         </p>
     </div>
     <p><a class="btn btn-light ml-2" href="{% url 'attendance_list' %}">Вернуться к списку посещаемостей</a></p>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Результаты РК{% endblock %}
+
+{% block content %}
+  {% for obj in rks %}
+    <div class="card" style="background: #f8f9fa;">
+      <div class="card-header">
+        <span class="font-weight-bold">{{ obj.rk.name }}</span> &middot; <span class="font-weight-bold">{{ obj.rk.disciple }}</span>
+      </div>
+      <div class="card-body">
+        <p>Студент: {{ obj.student.full_name }}</p>
+        <p>Результат: <span class="text-muted">{{ obj.result }}</span></p>
+        <p>Сдано: {{ obj.date }}</p>
+      </div>
+      <a class="btn btn-info m-3" href="{% url 'rk_result' obj.pk %}">Подробнее</a>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock %}
+  <!--
+    {% for obj in object_list %}
+      <div class="card" style="background: #f8f9fa;">
+        <div class="card-header">
+          <span class="font-weight-bold">{{ obj.rk.name }}</span> &middot;
+        </div>
+        <div class="card-body">
+          <p>Студент: {{ obj.student.full_name }}</p>
+          <p>Результат: <span class="text-muted">{{ obj.result }}</span></p>
+          <p>Сдано: {{ obj.date }}</p>
+        </div>
+        <a class="btn btn-info m-3" href="{% url 'rk_result' obj.pk %}">Подробнее</a>
+      </div>
+      <br />
+    {% endfor %}
+  -->

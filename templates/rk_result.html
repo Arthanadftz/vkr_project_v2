@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-section" style="height: 100%;">
+    <h2 class="display-4">{{ rk.rk.name }} &middot; {{ rk.rk.disciple }}</h2>
+    <div class="media-body">
+      <div class="media-body-body" style="border: 1px solid #dddddd; border-radius: 10px;">
+        {% for quest, answ in questions_answers %}
+          <p class="text-body" style="padding: 5px;">Вопрос:</p>
+          <p class="text-body" style="padding: 5px;">{{ quest }}</p>
+          <p class="text-body" style="padding: 5px;">Ответ: <span class="badge badge-info">{{ answ }}</span></p>
+          <p style="text-align: center;"><span class="badge badge-info">*****</span></p>
+        {% endfor %}
+      </div>
+      <br>
+      <p class="text-body">Студент: {{ rk.student.full_name }}</p>
+      <p class="text-body">Результат: <span class="badge badge-info">{{ rk.result }}</span></p>
+    </div>
+    <p><a class="btn btn-light ml-2" href="{% url 'rk_list' %}">Вернуться к списку РК</a></p>
+  </div>
+
+{% endblock content %}

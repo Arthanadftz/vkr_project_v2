@@ -13,6 +13,7 @@
       <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Новости</a>
     </p>
   </div>
+
   {% if user.user_role == 'СТ' %}
     <br>
     <div class="jumbotron">
@@ -21,6 +22,15 @@
 
       <p class="lead">
         <a class="btn btn-primary btn-lg" href="{% url 'order_new' %}" role="button">Заказать справку</a>
+      </p>
+    </div>
+    <!-- RK -->
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение рубежных контролей</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете просмотреть список доступных РК, выполнять их и просматривать результаты.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'rk_list' %}" role="button">Список рубежных контролей</a>
       </p>
     </div>
 
@@ -56,6 +66,18 @@
       </p>
       <p class="lead">
         <a class="btn btn-primary btn-lg" href="{% url 'attendance_list' %}" role="button">Список журналов</a>
+      </p>
+    </div>
+    <!-- RK -->
+    <br>
+    <div class="jumbotron">
+      <h1 class="display-4">Приложение рубежных контролей</h1>
+      <p class="lead">Здесь Вы - <span class="badge badge-info">{{ user.username }}</span>, можете просмотреть список доступных РК, добавлять в них контрольные вопросы и просматривать результаты.</p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'rk_list' %}" role="button">Список рубежных контролей</a>
+      </p>
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="{% url 'rk_new' %}" role="button">Создать новый РК</a>
       </p>
     </div>
   {% endif %}

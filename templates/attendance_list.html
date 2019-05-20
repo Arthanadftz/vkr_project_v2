@@ -6,7 +6,7 @@
   {% for item in object_list %}
     <div class="card" style="background: #f8f9fa;">
       <div class="card-header">
-        <span class="font-weight-bold">{{ item.title }}</span> &middot;
+        <span class="font-weight-bold">Журнал посещаемости по дисциплине {{ item.disciple.name }}</span> &middot;
         <span class="text-muted">Опубликовал {{ item.author }} | {{ item.date }}</span>
       </div>
       <div class="card-body">
@@ -15,7 +15,7 @@
         {% endif %}
       </div>
       <a class="btn btn-info m-3" href="{% url 'attendance_detail' item.pk %}">Подробнее</a>
-      <a class="btn btn-info m-3" href="#">Скачать</a>
+      <a class="btn btn-info m-3" href="{{ item.document.url }}">Скачать</a>
     </div>
     <br />
   {% endfor %}

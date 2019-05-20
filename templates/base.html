@@ -29,6 +29,8 @@
         <a class="navbar-brand" href="{% url 'attendance_new' %}">Добавить журнал посещаемости</a>
       {% endif %}
 
+      <a class="navbar-brand" href="{% url 'rk_list' %}">Рубежные контроли</a>
+
       {% if user.user_role == 'ПР' %}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a href="{% url 'article_new' %}">+ Создать новость</a>

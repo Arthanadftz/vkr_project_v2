@@ -90,6 +90,7 @@ class AttendanceCreateView(CreateView):
             )
 
         df.to_csv(fdir.format(fn=fname))
+        print(df)
         #Process form_data; mk csv_file based on it; save it to obj.document
         with open(fdir.format(fn=fname)) as f:
             my_file = File(f)

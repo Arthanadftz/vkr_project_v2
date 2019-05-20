@@ -6,7 +6,7 @@
   {% for item in object_list %}
     <div class="card" style="background: #f8f9fa;">
       <div class="card-header">
-        <span class="font-weight-bold">{{ item.name }}</span> &middot;
+        <span class="font-weight-bold">{{ item.name }}</span> &middot; <span class="font-weight-bold">{{ item.disciple }}</span>
         <span class="text-muted">Дата начала {{ item.date_start}}</span>
         <span class="text-muted">{{ item.date_stop }}</span>
 
@@ -17,7 +17,15 @@
           <span class="text-muted">{{ obj.body }}</span>
         {% endfor %}
       </div>
-      <a class="btn btn-info m-3" href="{% url 'question_new' item.pk %}">Добавить вопрос</a>
+      {% if item.rkresult_set.all %}
+        <a class="btn btn-info m-3" href="{% url 'rk_results_list' item.pk %}">Результаты РК</a>
+        {% else %}
+        {% if user.user_role == 'ПР' or user.is_superuser %}
+          <a class="btn btn-info m-3" href="{% url 'question_new' item.pk %}">Добавить вопрос</a>
+        {% else %}
+          <a class="btn btn-info m-3" href="{% url 'rk_solving' item.pk %}">Приступить к выполнению</a>
+        {% endif %}
+      {% endif %}
     </div>
     <br />
   {% endfor %}

@@ -10,7 +10,7 @@ from users.models import CustomUser
 
 def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]
-    valid_extensions = ['json', 'csv', 'jpg', 'png']
+    valid_extensions = ['.json', '.csv', '.jpg', '.png']
 
     if not ext.lower() in valid_extensions:
         raise ValidationError(f'Рарешение {ext} не поддерживается.')

@@ -1,8 +1,11 @@
 from django.db import models
 from django.utils.timezone import timedelta, now
 from django.urls import reverse
+from django.conf import settings
 
 from attendance_control.models import Disciple
+#from users.models import CustomUser
+
 # Create your models here.
 
 class RK(models.Model):
@@ -16,6 +19,26 @@ class RK(models.Model):
 
     def get_absolute_url(self):
         return reverse('question_new', args=[str(self.id)])
+
+
+class RKResult(models.Model):
+
+    student = models.ForeignKey(
+            settings.AUTH_USER_MODEL,
+            on_delete=models.CASCADE,
+            verbose_name = "Студент"
+        )
+    #student = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name="Студент", default=0)
+    rk = models.ForeignKey(RK, on_delete=models.CASCADE, verbose_name="РК", null=True)
+    result = models.CharField(max_length=5, verbose_name="Результат в '%'", default="100%")
+    answers = models.CharField(max_length=255, verbose_name="Ответы студента", default="[A, A]")
+    date = models.DateTimeField(auto_now=True, verbose_name='Дата выполнения')
+
+    def __str__(self):
+        return f"Результат студента, {self.student.full_name}: {self.result}"
+
+    def get_absolute_url(self):
+        return reverse('rk_result', args=[str(self.id)])
 
 
 class Question(models.Model):
@@ -38,6 +61,7 @@ class Question(models.Model):
 
     def __str__(self):
         return self.name
+
 
 
 

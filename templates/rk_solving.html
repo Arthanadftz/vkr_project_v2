@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>Написание {{ rk.name }} по дисциплине <span class="badge badge-info">{{ rk.disciple.name }}</span></h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="content-section" style="height: 100%;">
+      {% for question in questions %}
+        <p>{{ question.name }}</p>
+        <p>{{ question.body }}</p>
+        {{ form|crispy }}
+      {% endfor %}
+    </div>
+
+    <button class="btn btn-success ml-2" type="submit">Подтвердить</button>
+  </form>
+{% endblock %}
