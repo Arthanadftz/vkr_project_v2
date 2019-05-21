@@ -5,9 +5,9 @@
   <div class="jumbotron">
     <h1 class="display-4">Приложение новостей</h1>
     {% if user.is_authenticated %}
-      <p class="lead">Здравствйте, <span class="badge badge-info">{{ user.username }}</span>! В приложении новостей Вам доступны самые свежие новости кафедры и мира науки. Добро пожаловать!</p>
+      <p class="lead">Здравствуйте, <span class="badge badge-info">{{ user.username }}</span>! В приложении новостей Вам доступны самые свежие новости кафедры и мира науки. Добро пожаловать!</p>
     {% else %}
-      <p class="lead">Здравствйте! Вы не выполнили вход. Для доступа к ресурсам, пожалуйcта, <a href="{% url 'login' %}">авторизируйтесь в системе</a></p>
+      <p class="lead">Здравствуйте! Вы не выполнили вход. Для доступа к ресурсам, пожалуйcта, <a href="{% url 'login' %}">авторизируйтесь в системе</a></p>
     {% endif %}
     <p class="lead">
       <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">Новости</a>

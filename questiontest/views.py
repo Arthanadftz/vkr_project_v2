@@ -129,10 +129,13 @@ def rk_solving(request, rk_id):
 def RKResultDetail(request, **kwargs):
     obj = RKResult.objects.get(pk=kwargs.get("pk"))
     rk_questions = obj.rk.question_set.all()
+    rk_true_answers = [el.answer_true for el in rk_questions]
     rk_questions = [el.body for el in rk_questions]
     rk_answers = list(ast.literal_eval(obj.answers))
+    #rk_true_answers = list(ast.literal_eval(obj.question_set.all()))
 
-    context = {'rk': obj, 'questions_answers': list(zip(rk_questions, rk_answers))}
+
+    context = {'rk': obj, 'questions_answers': list(zip(rk_questions, rk_answers, rk_true_answers))}
 
     return render(request, "rk_result.html", context=context)
 
