@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'attendance_control',
     # Question
     "questiontest",
+    # Analysys
+    "analysys",
 ]
 
 MIDDLEWARE = [

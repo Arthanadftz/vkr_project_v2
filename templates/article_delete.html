@@ -6,6 +6,6 @@
     {% csrf_token %}
     <p>Вы уверены, что хотите удалить "{{ article.title }}"?</p>
     <button class="btn btn-danger ml-2" type="submit">Подтвердить</button>
-    <a class="btn btn-danger ml-2" href="{% url 'article_list' %}">Вернуться</a> 
+    <a class="btn btn-info ml-2" href="{% url 'article_list' %}">Вернуться</a> 
 </form>
 {% endblock %}

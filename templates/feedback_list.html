@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Обращения{% endblock %}
+
+{% block content %}
+  {% for object in object_list %}
+    <div class="card" style="background: #f8f9fa;">
+      <div class="card-header">
+        <span class="font-weight-bold">{{ object.name }}</span> &middot;
+        <span class="text-muted">Отправил {{ object.author }} | {{ object.date }}</span>
+      </div>
+      <div class="card-body">
+        {{ object.body }}
+      </div>
+      <a class="btn btn-info m-3" href="{% url 'feedback_detail' object.pk %}">Подробнее</a>
+    </div>
+    <br />
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-section" style="height: 100%;">
+    <h2 class="display-4">Обращение <span class="badge badge-info">{{ object.pk }}</span></h2>
+    <div class="media-body">
+        <p class="text-body">Отправил: {{ object.author }}</p>
+        <small>От {{ object.date }}</small>
+    </div>
+    <p><a class="btn btn-light ml-2" href="{% url 'feedback_list' %}">Вернуться к списку обращений</a></p>
+  </div>
+{% endblock content %}

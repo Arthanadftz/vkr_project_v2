@@ -62,9 +62,10 @@
 
                 {% if user.is_authenticated %}
                   {% if user.user_role == 'СТ' %}
-                    <div class="dropdown-divider"></div>
+                  <!--  <div class="dropdown-divider"></div> -->
                     <a class="dropdown-item" href="{% url 'orders_list' %}">Заявки</a>
                     <a class="dropdown-item" href="{% url 'chat_select' %}">Войти в чат</a>
+                    <div class="dropdown-divider"></div>
                   {% endif %}
                   {% if user.user_role == 'ПР' %}
                     <a class="dropdown-item" href="{% url 'index_chat' %}">Создать чат</a>
@@ -81,6 +82,12 @@
 
                 {% if user.is_superuser %}
                   <a class="dropdown-item" href="/admin">Админ-панель</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'feedback_list' %}">Список обращений</a>
+                  <div class="dropdown-divider"></div>
+                {% endif %}
+                {% if user.is_superuser or user.user_role == 'ПР' %}
+                  <a class="dropdown-item" href="{% url 'dashboard' %}">Статистика</a>
                   <div class="dropdown-divider"></div>
                 {% endif %}
 
@@ -121,7 +128,7 @@
 
   <footer class="blog-footer fixed-bottom" style="height: 96px; width: 100%; left: 0px; right: 0px; text-align: center; color: white; background-color: #343a40!important; margin-top: 100px;">
 
-    <p style="margin-top: 10px;">Форма обратной связи <a href="#">BMSTU</a>.</p>
+    <p style="margin-top: 10px;">Форма обратной связи <a href="{% url 'feedback_new' %}">BMSTU</a>.</p>
 
     <div class="soc-icons">
       <ul>

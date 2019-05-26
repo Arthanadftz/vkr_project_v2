@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Создание отчета{% endblock %}
+
+{% block content %}
+  <h1>Создать отчет</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <h1>Выберите пользователя</h1>
+    <select class="" name="all-users">
+      {% for user in users %}
+        <option value="{{ user.full_name }}">{{ user.full_name }}</option>
+      {% endfor %}
+    </select>
+
+    <br>
+    <h1>Выберите предмет</h1>
+    <select class="" name="disciples">
+      {% for disciple in disciples %}
+        <option value="{{ disciple.name }}">{{ disciple.name }}</option>
+      {% endfor %}
+    </select>
+
+    <button class="btn btn-success ml-2" type="submit">Создать</button>
+    <a class="btn btn-light ml-2" href="{% url 'home' %}">Вернуться</a>
+
+  </form>
+
+{% endblock %}

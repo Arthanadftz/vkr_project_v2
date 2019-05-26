@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Анализ{% endblock %}
+
+{% block content %}
+  <h1>Анализ данных</h1>
+
+    <h2><span class="badge badge-info">Студенты</span></h2>
+    <table id="att_form" class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>ФИО студента</th>
+          <th>Группа</th>
+          <th>Возраст</th>
+          <th>Результаты РК</th>
+          <th>Средний балл</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student, age, rk_res, avg in students_ages_rk_results_avgs %}
+          <tr>
+            <td><span class="badge badge-info">{{ student.full_name }}</span></td>
+            <td><span class="badge badge-info">{{ student.student_group }}</span></td>
+            <td><span class="badge badge-info">{{ age }}</span></td>
+            <td><span class="badge badge-info">{{ rk_res }}</span></td>
+            <td><span class="badge badge-info">{{ avg }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Количество студентов: <span class="badge badge-info">{{ students_count }}</span></td>
+          <td></td>
+          <td>Средний возраст: <span class="badge badge-info">{{ avg_age }}</span></td>
+          <td></td>
+          <td>Средний балл: <span class="badge badge-info">{{ students_all_avg }}</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <br>
+
+    <h2><span class="badge badge-info">Преподаватели</span></h2>
+    <table id="att_form" class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>ФИО преподавателя</th>
+          <th>Возраст</th>
+          <th>Дисциплины</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for teacher, age, disciples in teachers %}
+          <tr>
+            <td><span class="badge badge-info">{{ teacher.full_name }}</span></td>
+            <td><span class="badge badge-info">{{ age }}</span></td>
+            <td><span class="badge badge-info">{{ disciples }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Количество преподавателей: <span class="badge badge-info">{{ teachers_count }}</span></td>
+          <td>Средний возраст: <span class="badge badge-info">{{ avg_age_teacher }}</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <br>
+
+    <h2><span class="badge badge-info">Заявки</span></h2>
+    <table id="att_form" class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>ФИО студента</th>
+          <th>Статус Заявки</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td><span class="badge badge-info">{{ order.author.full_name }}</span></td>
+            <td><span class="badge badge-info">{{ order.status }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Количество заявок: <span class="badge badge-info">{{ orders_count }}</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <br>
+
+    <h2><span class="badge badge-info">Новости</span></h2>
+    <table id="att_form" class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>ФИО автора</th>
+          <th>Название</th>
+          <th>Дата публикации(YY/MM/DD HH:MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for article, date_pub in articles %}
+          <tr>
+            <td><span class="badge badge-info">{{ article.author.full_name }}</span></td>
+            <td><span class="badge badge-info">{{ article.title }}</span></td>
+            <td><span class="badge badge-info">{{ date_pub }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Количество постов: <span class="badge badge-info">{{ articles_count }}</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <br>
+
+    <h2><span class="badge badge-info">Обращения</span></h2>
+    <table id="att_form" class="table table-dark">
+      <thead class="thead-dark">
+        <tr>
+          <th>ФИО автора</th>
+          <th>Название</th>
+          <th>Дата публикации(YY/MM/DD HH:MM)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for feedback in feedbacks %}
+          <tr>
+            <td><span class="badge badge-info">{{ feedback.author.full_name }}</span></td>
+            <td><span class="badge badge-info">{{ feedback.name }}</span></td>
+            <td><span class="badge badge-info">{{ feedback.date }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+      <tfoot>
+        <tr>
+          <td>Количество обращений: <span class="badge badge-info">{{ feedbacks_count }}</span></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <a class="btn btn-light ml-2" href="http://pentaho.com" target="_blank">В панель анализа</a>
+    <a class="btn btn-light ml-2" href="{% url 'home' %}">Вернуться</a>
+
+{% endblock %}

@@ -11,8 +11,4 @@ urlpatterns = [
     path('<rk_id>/results', views.RKResultsList, name="rk_results_list"),
     #path('results/<int:pk>', views.RKResultView.as_view(), name="rk_result"),
     path('results/<int:pk>', views.RKResultDetail, name="rk_result"),
-    #path('<int:pk>/edit/',
-    #     views.ArticleUpdateView.as_view(), name='rk_edit'),
-    #path('<int:pk>/',
-    #     views.ArticleDetailView.as_view(), name='article_detail'),
 ]
