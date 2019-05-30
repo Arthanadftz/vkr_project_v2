@@ -98,7 +98,7 @@ def dashboardView(request):
     #    all_teacher_discs.append(", ".join([el.name for el in teacher.disciple_set.all()]))
 
     teachers_age = [int(timezone.now().year - el.date_of_birth.year) for el in all_teachers]
-    avg_age_teacher = sum(students_age)//students_count
+    avg_age_teacher = sum(teachers_age)//teachers_count
 
     students_rk_results = []
     students_rk_results_avgs = []

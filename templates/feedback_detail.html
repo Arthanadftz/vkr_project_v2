@@ -4,9 +4,12 @@
   <div class="content-section" style="height: 100%;">
     <h2 class="display-4">Обращение <span class="badge badge-info">{{ object.pk }}</span></h2>
     <div class="media-body">
-        <p class="text-body">Отправил: {{ object.author }}</p>
-        <small>От {{ object.date }}</small>
+      <p class="text-body">Заголовок: {{ object.name }}</p>
+      <p class="text-body">Текст: {{ object.body }}</p>
+      <p class="text-body">Отправил: <span class="badge badge-info">{{ object.author.username }}</span></p>
+      <small>От <span class="badge badge-info">{{ object.date }}</span></small>
     </div>
+    <br>
     <p><a class="btn btn-light ml-2" href="{% url 'feedback_list' %}">Вернуться к списку обращений</a></p>
   </div>
 {% endblock content %}
